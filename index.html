@@ -28,26 +28,57 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>Welcome to GitHub Pages.</h3>
+          <h3>The Single Model Indexer</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>EssenceOne takes all Views(page-parts)and Controllers(classes and functions) and places their Path $variables in 
+a Alphanumeric list in the order in which they are requested within each Page by the Indexer(model). 
+This elliminates the need for php- includes() and require-once() to be placed into the files. 
+This allows you to build your applications in two ways. 
+One have the Views Echo the Controllers functions using php short-tags or two 
+have your controllers echo the views or both.</p>
+<h3>The Indexer Ordered List(example users profile)</h3>
+<ul>
+  <li>ALL ASSIGNED TO AN ARRAY FOR EACH PAGE</li>
+  <li>$p1 check_user          =c2/c2a1.php</li>
+  <li>$p2 session_user        =c2/c2b1.php(both listed above header to allow redirect)</li>
+  <li>$p3 headers             =v2/v2a1.php</li>
+  <li>$p4 orizontal_menu      =v2/v2b1.php</li>
+  <li>$p5 user_profile_process=c2/c2c1.php</li>
+  <li>$p6 left_menu           =v2/v2c1.php</li>
+  <li>$p7 wall_post_process   =c2/c2d3.php(c2d3.php as the 3rd user file in the folder c2/)</li>
+  <li>$p8 profile             =v2/profile.php(page name)</li>
+  <li>$p9 friends_list        =c2/c2e1.php(set for inclusion into the right menu below)</li>
+  <li>$p10 right_menu         =v2/v2e1.php(echoes the functions from above c2/c2e1 file)</li>
+  <li>$p11 footer             =v2/v2g1.php(NOTICE WE CAN CHANGE page-parts TOO BY NUMERIC ORDER. v2g1,2,3,4</li>
+</ul>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h3>Modules Separation</h3>
+<p>Module separation is done also using Alphanumeric naming.</p>
+<ul>
+<li>Public(static)</li>
+<li>Protected(members)</li>
+<li>Private(admin)</li>  
+<li>Add More Modules(4,5,6,7,8 and so on)</li>
+</ul>
+
+<h3>Index Model</h3>
+<pre><code>
+if isset(_GET['page']; {
+$page = ?sanitize?(_GET['page']; //we .htaccess or sanitize//
+  if $page == 'home';
+  {
+  require once ($h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $h10 $h11); (DEFAULT PATH) 
+  }
+  //MANY MORE PAGES LISTED HERE//
+  if $page == 'profile';
+  {
+  require once ($p1 $p2 $p3 $p4 $p5 $p6 $p7 $p8 $p9 $p10 $p11); //our assigned inclusions from above//
+  }
+}else
+{
+require once DEFAULT //index.php//
+{
 </code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
 
 <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
