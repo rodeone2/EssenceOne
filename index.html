@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Essenceone</h1>
-        <h2>Single Model Php MVC Framework</h2>
+        <h2>Alphanumeric Php MVC Framework</h2>
         <a href="https://github.com/rodeone2/EssenceOne" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -30,54 +30,55 @@
         <section id="main-content">
           <h3>The Single Model Indexer</h3>
 
-<p>EssenceOne takes all Views(page-parts)and Controllers(classes and functions) and places their Path $variables in 
-a Alphanumeric list in the order in which they are requested within each Page by the Indexer(model). 
-This elliminates the need for php- includes() and require-once() to be placed into the files. 
-This allows you to build your applications in two ways. 
-One have the Views Echo the Controllers functions using php short-tags or two 
-have your controllers echo the views or both.</p>
-<h3>The Indexer Ordered List(example users profile)</h3>
+<p>EssenceOne uses a single Class Module Router. 
+.</p>
+<h3>A sample Class Module Page Router stack(example users profile)</h3>
 <ul>
-  <li>$p1 check_user          =c2/c2a1.php</li>
-  <li>$p2 session_user        =c2/c2b1.php(both listed above header to allow redirect)</li>
-  <li>$p3 headers             =v2/v2a1.php</li>
-  <li>$p4 orizontal_menu      =v2/v2b1.php</li>
-  <li>$p5 user_profile_process=c2/c2c1.php</li>
-  <li>$p6 left_menu           =v2/v2c1.php</li>
-  <li>$p7 wall_post_process   =c2/c2d3.php(c2d3.php as the 3rd user file in the folder c2/)</li>
-  <li>$p8 profile             =v2/profile.php(page name)</li>
-  <li>$p9 friends_list        =c2/c2e1.php(set for inclusion into the right menu below)</li>
-  <li>$p10 right_menu         =v2/v2e1.php(echoes the functions from above c2/c2e1 file)</li>
-  <li>$p11 footer             =v2/v2g1.php(NOTICE WE CAN CHANGE page-parts TOO BY NUMERIC ORDER. v2g1,2,3,4</li>
+  <li>a1/check_user.php           </li>
+  <li>a1/session_user.php         (both listed above header to allow redirect)</li>
+  <li>v1/header.php               </li>
+  <li>v2/horizontal_menu.php      </li>
+  <li>m2/left_user_profile.php    our data model before user for auto inclusion</li>
+  <li>v2/left_menu.php            </li>
+  <li>m6/wall_post_process.php    blog model for auto inclusion from module blog model m6</li>
+  <li>v2/content.php              our view for all modules that echo model data</li>
+  <li>m4/friends_list.php         </li>
+  <li>v2/right_menu.php           </li>
+  <li>v2/footer.php               (NOTICE WE CAN CHANGE page-parts TOO BY NUMERIC ORDER. v2g1,2,3,4</li>
 </ul>
 <p>Many page parts will not have to repeat.</p>
 <p>This simplifies the buid process by allowing the developer to fluidly name the files and list them into the config and indexer.</p>
 <h3>Modules Separation</h3>
-<p>Module separation is done also using Alphanumeric naming. 
-Folders = a configs, c controllers, v views, r resources, l libs, i images, s css, j java etc.</p>
+<p>Module separation is done also using Alphanumeric Naming but allows page parts of other Modules to be mixed. 
+Folders = a configs, m-models v-views c-controllers, l libs, i images, s css, j java etc.</p>
 <ul>
-<li>Public(static)          a1,c1,v1,r1,l1,i1,s1,j1</li>
-<li>Protected(members)      a2,c2,v2,r2,l2,i2,s2,j2</li>
-<li>Private(admin)          a3,c3,v3,r3,l3,i3,s3,j3</li>  
-<li>Add More Modules(4,5,6,7,8 and so on)</li>
+<li>Static          m1,v1,c1</li (MVC)>
+<li>Members         m2,v2,c2</li>
+<li>Groups          m3,v3,c3</li> 
+<li>Friends         m4,v4,c4</li>
+<li>Add More Modules(5,6,7,8 and so on)</li>
 </ul>
 
-<h3>Index Model</h3>
+<h3>Class Module Page Router(page stack)</h3>
 <pre><code>
 if isset(_GET['page']; {
-$page = ?sanitize?(_GET['page']; //we .htaccess or sanitize//
-  if $page == 'home';
-  {
-  require once ($h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $h10 $h11); (DEFAULT PATH) 
-  }
-  //MANY MORE PAGES LISTED HERE//
+$page = htmlspecialchars(_GET['page'];
   if $page == 'profile';
   {
-  require once ($p1 $p2 $p3 $p4 $p5 $p6 $p7 $p8 $p9 $p10 $p11); //our assigned inclusions from above//
+  include('m2/profile.php');//our data model// 
+  include('v2/content.php');//our view//
   }
+  
+  if $page == 'account';
+  {
+  include('m3/account.php'); //our data model//
+  include('v2/content.php');//our view//
+  }
+  //ADD MORE PAGES HERE//
 }else
 {
-require once DEFAULT //index.php//
+  include('m2/profile.php');//our data model// 
+  include('v2/content.php');//our view//
 {
 </code></pre>
 
